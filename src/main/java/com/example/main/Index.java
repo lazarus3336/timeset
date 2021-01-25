@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Index {
 
+	@Autowired
+	jdbc jdbc;
+	
 	@RequestMapping("/22")
 	public String hello() {
 		
-		jdbc jdbc=  new jdbc();
 
 		jdbc.hello();
 		return "Hey, Spring Boot 的 Hello World ! ";
