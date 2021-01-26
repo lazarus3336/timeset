@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.PageDataMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.PageData">
+    <id column="page_id" jdbcType="VARCHAR" property="pageId" />
+    <result column="page_name" jdbcType="VARCHAR" property="pageName" />
+    <result column="parent_menu_id" jdbcType="VARCHAR" property="parentMenuId" />
+    <result column="parent_page_id" jdbcType="VARCHAR" property="parentPageId" />
+    <result column="ser_no" jdbcType="INTEGER" property="serNo" />
+    <result column="effective" jdbcType="VARCHAR" property="effective" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="data_create_time" jdbcType="TIMESTAMP" property="dataCreateTime" />
+    <result column="data_update_time" jdbcType="TIMESTAMP" property="dataUpdateTime" />
+    <result column="data_update_user" jdbcType="VARCHAR" property="dataUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from page_data
+    where page_id = #{pageId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.entity.PageData">
+    insert into page_data (page_id, page_name, parent_menu_id, 
+      parent_page_id, ser_no, effective, 
+      url, data_create_time, data_update_time, 
+      data_update_user)
+    values (#{pageId,jdbcType=VARCHAR}, #{pageName,jdbcType=VARCHAR}, #{parentMenuId,jdbcType=VARCHAR}, 
+      #{parentPageId,jdbcType=VARCHAR}, #{serNo,jdbcType=INTEGER}, #{effective,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{dataCreateTime,jdbcType=TIMESTAMP}, #{dataUpdateTime,jdbcType=TIMESTAMP}, 
+      #{dataUpdateUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.PageData">
+    update page_data
+    set page_name = #{pageName,jdbcType=VARCHAR},
+      parent_menu_id = #{parentMenuId,jdbcType=VARCHAR},
+      parent_page_id = #{parentPageId,jdbcType=VARCHAR},
+      ser_no = #{serNo,jdbcType=INTEGER},
+      effective = #{effective,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      data_create_time = #{dataCreateTime,jdbcType=TIMESTAMP},
+      data_update_time = #{dataUpdateTime,jdbcType=TIMESTAMP},
+      data_update_user = #{dataUpdateUser,jdbcType=VARCHAR}
+    where page_id = #{pageId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select page_id, page_name, parent_menu_id, parent_page_id, ser_no, effective, url, 
+    data_create_time, data_update_time, data_update_user
+    from page_data
+    where page_id = #{pageId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select page_id, page_name, parent_menu_id, parent_page_id, ser_no, effective, url, 
+    data_create_time, data_update_time, data_update_user
+    from page_data
+  </select>
+</mapper>
